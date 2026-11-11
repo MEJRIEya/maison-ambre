@@ -1,0 +1,54 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: maison_ambre
+      POSTGRES_USER: maison
+      POSTGRES_PASSWORD: maison
+    volumes:
+      - ./docker/create-test-db.sql:/docker-entrypoint-initdb.d/create-test-db.sql:ro
+    healthcheck:
+      # -h 127.0.0.1: during first start-up Postgres runs init scripts on a socket only,
+      # so this check only passes once the real server is accepting TCP connections.
+      test: ["CMD-SHELL", "pg_isready -h 127.0.0.1 -U maison -d maison_ambre"]
+      interval: 3s
+      timeout: 3s
+      retries: 30
+
+  api:
+    build: ./backend
+    environment:
+      DB_URL: jdbc:postgresql://db:5432/maison_ambre
+      DB_USER: maison
+      DB_PASSWORD: maison
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: on-failure
+
+  web:
+    build: ./frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - api
+
+  # Automated tests, run on demand: docker compose run --rm api-tests
+  api-tests:
+    image: maven:3.9-eclipse-temurin-21
+    profiles: ["test"]
+    working_dir: /app
+    volumes:
+      - ./backend:/app
+      - maven-cache:/root/.m2
+    environment:
+      TEST_DB_URL: jdbc:postgresql://db:5432/maison_ambre_test
+      DB_USER: maison
+      DB_PASSWORD: maison
+    command: mvn -B test
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  maven-cache:
