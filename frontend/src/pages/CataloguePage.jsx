@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { api } from '../api.js';
 import { formatMoney } from '../money.js';
 import { useShop } from '../ShopContext.jsx';
@@ -46,7 +47,9 @@ export default function CataloguePage() {
           return (
             <article key={product.id} className="card">
               <span className="tag">{product.family}</span>
-              <h2>{product.name}</h2>
+              <h2>
+                <Link to={`/products/${product.id}`}>{product.name}</Link>
+              </h2>
               <p className="muted">{product.sizeMl} ml</p>
               <p className="price">{formatMoney(product.price)}</p>
               <p className={product.available ? 'stock' : 'stock out'}>{availabilityLabel(product)}</p>

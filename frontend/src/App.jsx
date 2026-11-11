@@ -1,6 +1,7 @@
 import { NavLink, Route, Routes } from 'react-router-dom';
 import { useShop } from './ShopContext.jsx';
 import CataloguePage from './pages/CataloguePage.jsx';
+import ProductPage from './pages/ProductPage.jsx';
 import CartPage from './pages/CartPage.jsx';
 
 function BoutiqueSwitcher() {
@@ -46,6 +47,7 @@ export default function App() {
         {boutique && (
           <Routes>
             <Route path="/" element={<CataloguePage />} />
+            <Route path="/products/:productId" element={<ProductPage />} />
             <Route path="/cart" element={<CartPage />} />
             <Route path="*" element={<p>Page not found.</p>} />
           </Routes>
