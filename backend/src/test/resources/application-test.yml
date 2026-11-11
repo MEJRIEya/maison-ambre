@@ -1,0 +1,9 @@
+# Tests run against a real PostgreSQL (same SQL, same locking behaviour as production),
+# in a separate database so they never touch the demo data.
+# docker compose creates maison_ambre_test next to maison_ambre (see docker/create-test-db.sql).
+spring:
+  datasource:
+    url: ${TEST_DB_URL:jdbc:postgresql://localhost:5432/maison_ambre_test}
+  flyway:
+    # Schema only: each test creates the data it needs.
+    locations: classpath:db/migration
