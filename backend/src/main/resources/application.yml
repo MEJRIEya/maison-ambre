@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: maison-ambre-api
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/maison_ambre}
+    username: ${DB_USER:maison}
+    password: ${DB_PASSWORD:maison}
+  jpa:
+    # Flyway owns the schema; Hibernate never creates or changes tables.
+    hibernate:
+      ddl-auto: none
+    open-in-view: false
+  flyway:
+    # db/migration = schema, db/seed = demo data (left out in tests).
+    locations: classpath:db/migration,classpath:db/seed
+
+server:
+  port: 8080
+
+app:
+  insights:
+    # A product is "low stock" in a boutique when its stock is at or below this number.
+    low-stock-threshold: 5
