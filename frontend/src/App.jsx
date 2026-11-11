@@ -3,6 +3,7 @@ import { useShop } from './ShopContext.jsx';
 import CataloguePage from './pages/CataloguePage.jsx';
 import ProductPage from './pages/ProductPage.jsx';
 import CartPage from './pages/CartPage.jsx';
+import InsightsPage from './pages/InsightsPage.jsx';
 
 function BoutiqueSwitcher() {
   const { boutiques, boutiqueId, setBoutiqueId } = useShop();
@@ -36,6 +37,7 @@ export default function App() {
               Catalogue
             </NavLink>
             <NavLink to="/cart">Cart ({itemCount})</NavLink>
+            <NavLink to="/insights">Manager insights</NavLink>
           </nav>
           <BoutiqueSwitcher />
         </div>
@@ -49,6 +51,7 @@ export default function App() {
             <Route path="/" element={<CataloguePage />} />
             <Route path="/products/:productId" element={<ProductPage />} />
             <Route path="/cart" element={<CartPage />} />
+            <Route path="/insights" element={<InsightsPage />} />
             <Route path="*" element={<p>Page not found.</p>} />
           </Routes>
         )}
