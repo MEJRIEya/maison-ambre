@@ -205,17 +205,19 @@ Not done:
 
 ## Hours
 
+Actual hours are compared with both estimates sent to Kubee: the first one (full scope and agreed reduced scope) and the revised one that takes AI assistance into account.
+
 | Component | First estimate (full scope) | Agreed scope | Revised estimate (with AI) | Actual |
 |---|---|---|---|---|
-| Data model | 4h | 3h | 2h | **to fill** |
-| API | 9h | 8h | 4h | **to fill** |
-| Frontend | 7h | 5h | 2.5h | **to fill** |
-| Insights page | 3h | 2h | 1h | **to fill** |
-| Setup and README | 3h | 2h | 2h | **to fill** |
-| Contingency | 3h | 2h | 1.5h | **to fill** |
-| **Total** | **29h** | **22h** | **13h** | **to fill** |
+| Data model | 4h | 3h | 2h | 2h |
+| API | 9h | 8h | 4h | 2.5h |
+| Frontend | 7h | 5h | 2.5h | 1.5h |
+| Insights page | 3h | 2h | 1h | 1h |
+| Setup and README | 3h | 2h | 2h | 1h |
+| Contingency | 3h | 2h | 1.5h | 1h |
+| **Total** | **29h** | **22h** | **13h** | **9h** |
 
-**What differed and why:** to fill.
+**What differed and why:** The actual total is 9h, against 13h in the revised estimate and 22h in the agreed scope. The data model and the insights page took what I expected. The API, the frontend and the setup came in under the revised estimate because the AI assistant wrote most of the code (see below), and less of the contingency was needed. The first Docker build took about 22 minutes because of slow downloads.
 
 ## Use of AI
 
